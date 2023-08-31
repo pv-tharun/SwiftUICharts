@@ -79,6 +79,8 @@ public struct ExtraLineData: Identifiable {
                 _highestValue = self.getMaxValue()
             case .maximum(of: let value):
                 _highestValue = max(self.getMaxValue(), value)
+            case .maximumRoundedValue:
+                _highestValue = self.getMaxValue().getRoundedRange(in: self.getMaxValue())
             }
             
             return (_highestValue - _lowestValue) + 0.00000000001
@@ -103,6 +105,8 @@ public struct ExtraLineData: Identifiable {
                 return self.getMaxValue()
             case .maximum(of: let value):
                 return max(self.getMaxValue(), value)
+            case .maximumRoundedValue:
+                return self.getMaxValue().getRoundedRange(in: self.getMaxValue())
             }
         }
     }

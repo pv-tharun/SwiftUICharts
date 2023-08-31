@@ -29,6 +29,8 @@ extension CTLineBarChartDataProtocol where Self: GetDataProtocol,
                 _highestValue = self.dataSets.maxValue()
             case .maximum(of: let value):
                 _highestValue = max(self.dataSets.maxValue(), value)
+            case .maximumRoundedValue:
+                _highestValue = self.dataSets.maxValue().getRoundedRange(in: self.dataSets.maxValue())
             }
             
             return (_highestValue - _lowestValue)
@@ -55,6 +57,8 @@ extension CTLineBarChartDataProtocol where Self: GetDataProtocol,
                 return self.dataSets.maxValue()
             case .maximum(of: let value):
                 return max(self.dataSets.maxValue(), value)
+            case .maximumRoundedValue:
+                return self.dataSets.maxValue().getRoundedRange(in: self.dataSets.maxValue())
             }
         }
     }
@@ -117,9 +121,54 @@ extension CTLineBarChartDataProtocol where Self: GetDataProtocol {
             }
             let labels = firstLabel + otherLabels
             return labels
+        case .amount:
+            let dataRange: Double = self.range
+            let minValue: Double = self.minValue
+            let formatter = numberFormatter ?? NumberFormatter()
+            let range: Double = dataRange / Double(self.chartStyle.yAxisNumberOfLabels-1)
+            let firstLabel: [String] = {
+                return [amountLabel(range: range, value: minValue, formatter: formatter)]
+            }()
+            let otherLabels: [String] = (1...self.chartStyle.yAxisNumberOfLabels-1).map {
+                let value = minValue + range * Double($0)
+                return amountLabel(range: range, value: value, formatter: formatter)
+            }
+            let labels = firstLabel + otherLabels
+            return labels
         case .custom:
             return self.yAxisLabels ?? []
         }
+    }
+    
+    private func amountLabel(range: Double, value: Double, formatter: NumberFormatter) -> String
+    {
+        if value >= 1_000_000_000 {
+            formatter.maximumFractionDigits = getFractionDigits(range: range, templateValue: 1_000_000_000)
+            return "\(formatter.string(from: NSNumber(value: Double(value) / 1_000_000_000)) ?? "")B"
+        } else if value >= 1_000_000 {
+            formatter.maximumFractionDigits = getFractionDigits(range: range, templateValue: 1_000_000)
+            return "\(formatter.string(from: NSNumber(value: Double(value) / 1_000_000)) ?? "")M"
+        } else if value >= 1_000 {
+            formatter.maximumFractionDigits = getFractionDigits(range: range, templateValue: 1_000)
+            return "\(formatter.string(from: NSNumber(value: Double(value) / 1_000)) ?? "")K"
+        } else {
+            formatter.maximumFractionDigits = 0
+            return "\(formatter.string(from: NSNumber(value: Double(value))) ?? "")"
+        }
+    }
+    
+    private func getFractionDigits(range: Double, templateValue: Double) -> Int
+    {
+        var value = templateValue
+        var fractionDigits = 0
+        
+        while (self.range < (value * Double(self.chartStyle.yAxisGridStyle.numberOfLines)))
+        {
+            fractionDigits += 1
+            value /= 10
+        }
+        
+        return fractionDigits
     }
 }
 
