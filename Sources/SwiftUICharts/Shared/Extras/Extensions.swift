@@ -116,6 +116,30 @@ extension Double {
     func divide<T:BinaryFloatingPoint>(by divideBy: T) -> Double {
         self / Double(divideBy)
     }
+    
+    func getRoundedRange(in number: Double) -> Double {
+        var count = 0
+        var num = number
+        var firstDigit: Int = 0
+        
+        // Handle the case when num is zero
+        if num == 0 {
+            return 0
+        }
+        
+        while num >= 10 {
+            var tempNum = num / 10
+            if tempNum < 10
+            {
+                firstDigit = Int(num)
+            }
+            num = tempNum
+            count += 1
+        }
+        
+        return pow(10.0, Double(count - 1)) * Double((firstDigit + 1))
+    }
+
 }
 extension CGFloat {
     /**
