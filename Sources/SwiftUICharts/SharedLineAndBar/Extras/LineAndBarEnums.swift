@@ -102,6 +102,8 @@ public enum Topline: Hashable {
     case maximumValue
     /// Set a custom topline
     case maximum(of: Double)
+    /// Rounding off the highest value in the data set(s)
+    case maximumRoundedValue
 }
 
 /**
@@ -118,6 +120,8 @@ public enum Topline: Hashable {
 public enum YAxisLabelType {
     /// Auto generated, numeric labels.
     case numeric
+    /// Amount labels
+    case amount
     /// Custom labels array
     case custom
 }
