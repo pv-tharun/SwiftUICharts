@@ -114,6 +114,7 @@ public final class LineChartData: CTLineChartDataProtocol, GetDataProtocol, Publ
                             }
                         }
                     }
+                    .padding(.trailing, getTrailingPadding())
                 }
             }
         }
@@ -141,6 +142,16 @@ public final class LineChartData: CTLineChartDataProtocol, GetDataProtocol, Publ
                                chartSize: chartSize)
             self.extraLineData?.getTouchInteraction(touchLocation: touchLocation, chartSize: chartSize)
         }
+    }
+    
+    private final func getTrailingPadding() -> CGFloat
+    {
+        if (self.dataSets.dataPoints.count % (self.xAxisLabels?.count ?? 0)) == 0 && (self.dataSets.dataPoints.count > (self.xAxisLabels?.count ?? 0))
+        {
+            let labelDivision = (self.dataSets.dataPoints.count / (self.xAxisLabels?.count ?? 0)) - 1
+            return (CGFloat(self.viewData.chartSize.width) / CGFloat(self.dataSets.dataPoints.count)) * CGFloat(labelDivision)
+        }
+        return 0
     }
     
     public typealias SetType = LineDataSet
