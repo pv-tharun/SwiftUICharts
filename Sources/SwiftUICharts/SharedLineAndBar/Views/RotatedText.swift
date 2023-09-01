@@ -49,7 +49,6 @@ internal struct RotatedText<ChartData>: View where ChartData: CTLineBarChartData
         Text(LocalizedStringKey(label))
             .font(chartData.chartStyle.xAxisLabelFont)
             .foregroundColor(chartData.chartStyle.xAxisLabelColour)
-            .lineLimit(1)
             .overlay(
                 GeometryReader { geo in
                     Color.clear
@@ -65,7 +64,7 @@ internal struct RotatedText<ChartData>: View where ChartData: CTLineBarChartData
                         }
                 }
             )
-            .fixedSize(horizontal: true, vertical: false)
+            .fixedSize(horizontal: true, vertical: true)
             .rotationEffect(rotation, anchor: .center)
             .frame(width: rotation == .degrees(0) || rotation == .radians(0) ? finalFrame.width : finalFrame.height,
                    height: rotation == .degrees(0) || rotation == .radians(0) ? finalFrame.height : finalFrame.width)
@@ -164,7 +163,6 @@ internal struct TempText<ChartData>: View where ChartData: CTLineBarChartDataPro
         Text(LocalizedStringKey(label))
             .font(chartData.chartStyle.xAxisLabelFont)
             .foregroundColor(chartData.chartStyle.xAxisLabelColour)
-            .lineLimit(1)
             .overlay(
                 GeometryReader { geo in
                     Color.clear
@@ -183,7 +181,7 @@ internal struct TempText<ChartData>: View where ChartData: CTLineBarChartDataPro
                         }
                 }
             )
-            .fixedSize(horizontal: true, vertical: false)
+            .fixedSize(horizontal: true, vertical: true)
             .rotationEffect(rotation, anchor: .center)
             
             .frame(width: rotation == .degrees(0) || rotation == .radians(0) ? finalFrame.width : finalFrame.height,
