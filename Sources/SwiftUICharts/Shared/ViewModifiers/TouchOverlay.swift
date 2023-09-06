@@ -40,15 +40,16 @@ internal struct TouchOverlay<T>: ViewModifier where T: CTChartData {
                     ZStack {
                         content
                             .gesture(
-                                DragGesture(minimumDistance: minDistance, coordinateSpace: .local)
-                                    .onChanged { (value) in
-                                        chartData.setTouchInteraction(touchLocation: value.location,
-                                                                      chartSize: geo.frame(in: .local))
-                                    }
-                                    .onEnded { _ in
-                                        chartData.infoView.isTouchCurrent = false
-                                        chartData.infoView.touchOverlayInfo = []
-                                    }
+                                LongPressGesture(minimumDuration: 0.1)
+                                    .sequenced(before: DragGesture(minimumDistance: minDistance, coordinateSpace: .local)
+                                        .onChanged { (value) in
+                                            chartData.setTouchInteraction(touchLocation: value.location,
+                                                                          chartSize: geo.frame(in: .local))
+                                        }
+                                        .onEnded { _ in
+                                            chartData.infoView.isTouchCurrent = false
+                                            chartData.infoView.touchOverlayInfo = []
+                                        })
                             )
                         if chartData.infoView.isTouchCurrent {
                             chartData.getTouchInteraction(touchLocation: chartData.infoView.touchLocation,
