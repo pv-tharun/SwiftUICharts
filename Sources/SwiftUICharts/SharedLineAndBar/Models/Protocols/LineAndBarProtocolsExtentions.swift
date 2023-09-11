@@ -180,8 +180,8 @@ extension CTLineBarChartDataProtocol {
 }
 
 extension CTLineBarChartDataProtocol where Self: GetDataProtocol {
-    public func getYAxisLabels() -> some View {
-        VStack {
+    public func getYAxisLabels(alignment: HorizontalAlignment) -> some View {
+        VStack(alignment: alignment) {
             if self.chartStyle.xAxisLabelPosition == .top {
                 Spacer()
                     .frame(height: yAxisPaddingHeight)

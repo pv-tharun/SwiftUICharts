@@ -96,12 +96,12 @@ public final class HorizontalBarChartData: CTHorizontalBarChartDataProtocol, Get
         }
     }
     
-    public final func getYAxisLabels() -> some View {
+    public final func getYAxisLabels(alignment: HorizontalAlignment) -> some View {
         Group {
             switch self.chartStyle.xAxisLabelsFrom {
             case .dataPoint:
                 
-                VStack {
+                VStack(alignment: alignment) {
                     if self.chartStyle.xAxisLabelPosition == .top {
                         Spacer()
                             .frame(height: yAxisPaddingHeight + 8) // Why 8 ?
@@ -131,7 +131,7 @@ public final class HorizontalBarChartData: CTHorizontalBarChartDataProtocol, Get
             case .chartData:
                 
                 if let labelArray = self.xAxisLabels {
-                    VStack(spacing: 0) {
+                    VStack(alignment: alignment, spacing: 0) {
                         ForEach(labelArray, id: \.self) { data in
                             Spacer()
                                 .frame(minHeight: 0, maxHeight: 500)

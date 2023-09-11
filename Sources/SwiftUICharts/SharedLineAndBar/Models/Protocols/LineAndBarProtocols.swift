@@ -76,7 +76,7 @@ public protocol CTLineBarChartDataProtocol: CTChartData where CTStyle: CTLineBar
     /**
      Displays a view for the labels on the Y Axis.
      */
-    func getYAxisLabels() -> YLabels
+    func getYAxisLabels(alignment: HorizontalAlignment) -> YLabels
     
     
     /**
