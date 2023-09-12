@@ -137,7 +137,19 @@ extension Double {
             count += 1
         }
         
-        return pow(10.0, Double(count - 1)) * Double((firstDigit + 1))
+        if count > 1
+        {
+            return pow(10.0, Double(count - 1)) * Double((firstDigit + 1))
+        }
+        else if count == 1
+        {
+            let tens = firstDigit / 10
+            return Double((Int(tens) + 1) * 10)
+        }
+        else
+        {
+            return number
+        }
     }
 
 }
