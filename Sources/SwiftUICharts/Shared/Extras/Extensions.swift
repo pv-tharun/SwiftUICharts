@@ -123,8 +123,8 @@ extension Double {
         var firstDigit: Int = 0
         
         // Handle the case when num is zero
-        if num == 0 {
-            return 0
+        if num <= 10 {
+            return num
         }
         
         while num >= 10 {
