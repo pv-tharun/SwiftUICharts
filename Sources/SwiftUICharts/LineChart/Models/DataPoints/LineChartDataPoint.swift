@@ -19,6 +19,12 @@ public struct LineChartDataPoint: CTStandardLineDataPoint, IgnoreMe {
     public var date: Date?
     public var pointColour: PointColour?
     
+    //CustomCode
+    public var customFloatingInfo: [CustomFloatingView]?
+    
+    public var canShowCustomFloatingInfo: Bool = false
+    //
+    
     public var ignoreMe: Bool = false
     
     public var legendTag: String = ""
@@ -42,5 +48,13 @@ public struct LineChartDataPoint: CTStandardLineDataPoint, IgnoreMe {
         self.description = description
         self.date = date
         self.pointColour = pointColour
+    }
+}
+
+//CustomCode
+extension LineChartDataPoint
+{
+    public static func == (lhs: LineChartDataPoint, rhs: LineChartDataPoint) -> Bool {
+        return lhs.customFloatingInfo == rhs.customFloatingInfo
     }
 }
