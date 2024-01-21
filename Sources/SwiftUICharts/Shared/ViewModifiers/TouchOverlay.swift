@@ -48,6 +48,7 @@ internal struct TouchOverlay<T>: ViewModifier where T: CTChartData {
                                     .onEnded { _ in
                                         chartData.infoView.isTouchCurrent = false
                                         chartData.infoView.touchOverlayInfo = []
+                                        chartData.infoView.touchOverlayCustomInfo = []
                                     }
                             )
                         if chartData.infoView.isTouchCurrent {
