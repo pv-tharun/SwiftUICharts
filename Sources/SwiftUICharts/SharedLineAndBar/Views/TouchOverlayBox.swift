@@ -35,11 +35,13 @@ internal struct TouchOverlayBox<T: CTChartData>: View {
                             HStack
                             {
                                     Text("\(point.leftLabel.title)")
+                                        .frame(alignment: .leading)
                                         .font(point.leftLabel.font)
                                         .foregroundColor(point.leftLabel.color)
         
                                 
                                     Text("\(point.rightLabel.title)")
+                                        .frame(alignment: .trailing)
                                         .font(point.rightLabel.font)
                                         .foregroundColor(point.rightLabel.color)
                             }
