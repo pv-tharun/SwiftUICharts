@@ -41,13 +41,17 @@ public struct LineChartDataPoint: CTStandardLineDataPoint, IgnoreMe {
         xAxisLabel: String? = nil,
         description: String? = nil,
         date: Date? = nil,
-        pointColour: PointColour? = nil
+        pointColour: PointColour? = nil,
+        customFloatingInfo: [CustomFloatingView]? = nil,
+        canShowCustomFloatingInfo: Bool = false
     ) {
         self.value = value
         self.xAxisLabel = xAxisLabel
         self.description = description
         self.date = date
         self.pointColour = pointColour
+        self.customFloatingInfo = customFloatingInfo
+        self.canShowCustomFloatingInfo = canShowCustomFloatingInfo
     }
 }
 
