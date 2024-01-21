@@ -208,6 +208,10 @@ extension LineChartData {
                 self.infoView.touchOverlayInfo.append(dp)
             }
             touchedDataPointPublisher.send(dataSets.dataPoints[index])
+            
+            //CustomCode
+            self.infoView.touchOverlayCustomInfo = dataSets.dataPoints[index].customFloatingInfo ?? []
+            //
         }
     }
 }
