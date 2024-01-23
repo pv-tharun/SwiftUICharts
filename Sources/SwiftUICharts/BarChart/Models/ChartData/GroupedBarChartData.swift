@@ -173,6 +173,9 @@ public final class GroupedBarChartData: CTMultiBarChartDataProtocol, GetDataProt
                     self.infoView.touchOverlayInfo.append(dp)
                 }
                 touchedDataPointPublisher.send(dataSets.dataSets[index].dataPoints[subIndex])
+                //CustomCode
+                self.infoView.touchOverlayCustomInfo = dataSets.dataSets[index].dataPoints[subIndex].customFloatingInfo ?? []
+                //
             }
         }
     }

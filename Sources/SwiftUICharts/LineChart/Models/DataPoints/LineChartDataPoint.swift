@@ -21,8 +21,6 @@ public struct LineChartDataPoint: CTStandardLineDataPoint, IgnoreMe {
     
     //CustomCode
     public var customFloatingInfo: [CustomFloatingView]?
-    
-    public var canShowCustomFloatingInfo: Bool = false
     //
     
     public var ignoreMe: Bool = false
@@ -42,8 +40,7 @@ public struct LineChartDataPoint: CTStandardLineDataPoint, IgnoreMe {
         description: String? = nil,
         date: Date? = nil,
         pointColour: PointColour? = nil,
-        customFloatingInfo: [CustomFloatingView]? = nil,
-        canShowCustomFloatingInfo: Bool = false
+        customFloatingInfo: [CustomFloatingView]? = nil
     ) {
         self.value = value
         self.xAxisLabel = xAxisLabel
@@ -51,7 +48,6 @@ public struct LineChartDataPoint: CTStandardLineDataPoint, IgnoreMe {
         self.date = date
         self.pointColour = pointColour
         self.customFloatingInfo = customFloatingInfo
-        self.canShowCustomFloatingInfo = canShowCustomFloatingInfo
     }
 }
 
