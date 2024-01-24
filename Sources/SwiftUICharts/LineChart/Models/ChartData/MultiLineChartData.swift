@@ -203,6 +203,11 @@ extension MultiLineChartData {
                     self.infoView.touchOverlayInfo.append(dp)
                 }
                 touchedDataPointPublisher.send(dataSets.dataSets[setIndex].dataPoints[index])
+                if let value = dataSets.dataSets[setIndex].dataPoints[index].customFloatingInfo
+                {
+                    self.infoView.touchOverlayCustomInfo.append(contentsOf: value)
+                }
+                
                 if !dataSets.dataSets[setIndex].style.ignoreZero {
                     dataSets.dataSets[setIndex].dataPoints[index].legendTag = dataSets.dataSets[setIndex].legendTitle
                     return dataSets.dataSets[setIndex].dataPoints[index]
