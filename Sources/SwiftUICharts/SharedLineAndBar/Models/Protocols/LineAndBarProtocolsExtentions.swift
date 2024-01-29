@@ -142,33 +142,26 @@ extension CTLineBarChartDataProtocol where Self: GetDataProtocol {
     
     private func amountLabel(range: Double, value: Double, formatter: NumberFormatter) -> String
     {
-        if value >= 1_000_000_000 {
-            formatter.maximumFractionDigits = getFractionDigits(range: range, templateValue: 1_000_000_000)
-            return "\(formatter.string(from: NSNumber(value: Double(value) / 1_000_000_000)) ?? "")B"
-        } else if value >= 1_000_000 {
-            formatter.maximumFractionDigits = getFractionDigits(range: range, templateValue: 1_000_000)
-            return "\(formatter.string(from: NSNumber(value: Double(value) / 1_000_000)) ?? "")M"
-        } else if value >= 1_000 {
-            formatter.maximumFractionDigits = getFractionDigits(range: range, templateValue: 1_000)
-            return "\(formatter.string(from: NSNumber(value: Double(value) / 1_000)) ?? "")K"
-        } else {
-            formatter.maximumFractionDigits = 0
-            return "\(formatter.string(from: NSNumber(value: Double(value))) ?? "")"
-        }
+        return formatNumber(value)
     }
     
-    private func getFractionDigits(range: Double, templateValue: Double) -> Int
-    {
-        var value = templateValue
-        var fractionDigits = 0
+    private func formatNumber(_ num: Double) -> String {
+        let suffixes = ["", "K", "M", "B", "T"]
+        var number = Double(num)
+        var sign = ""
         
-        while (self.range < (value * Double(self.chartStyle.yAxisGridStyle.numberOfLines)))
-        {
-            fractionDigits += 1
-            value /= 10
+        if num < 0 {
+            sign = "-"
+            number = abs(number)
         }
         
-        return fractionDigits
+        var magnitude = 0
+        while number >= 1000 {
+            magnitude += 1
+            number /= 1000.0
+        }
+        
+        return "\(sign)\(String(format: "%f", number))\(suffixes[magnitude])"
     }
 }
 
