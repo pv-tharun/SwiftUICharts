@@ -161,7 +161,7 @@ extension CTLineBarChartDataProtocol where Self: GetDataProtocol {
             number /= 1000.0
         }
         
-        return "\(sign)\(String(format: "%f", number))\(suffixes[magnitude])"
+        return "\(sign)\(String(format: "%.0f", number))\(suffixes[magnitude])"
     }
 }
 
