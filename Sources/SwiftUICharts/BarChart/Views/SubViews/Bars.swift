@@ -42,6 +42,7 @@ internal struct ColourBar<CD: CTBarChartDataProtocol & GetDataProtocol,
                 .fill(colour)
                 .if(dataPoint.value < 0, transform: { view in
                     view
+                        .rotationEffect(.degrees(180))
                 })
                 .frame(width: BarLayout.barWidth(geo.size.width, chartData.barStyle.barWidth))
                 .frame(height: frameAnimationValue(dataPoint.value, height: geo.size.height))
