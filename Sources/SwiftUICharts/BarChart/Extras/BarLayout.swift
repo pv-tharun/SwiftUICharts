@@ -13,7 +13,7 @@ internal struct BarLayout {
     }
     
     internal static func barHeight(_ totalHeight: CGFloat, _ value: Double, _ maxValue: Double) -> CGFloat {
-        return totalHeight * divideByZeroProtection(CGFloat.self, value, maxValue)
+        return abs(totalHeight * divideByZeroProtection(CGFloat.self, value, maxValue)) // added abs to provide valid height for negative values in graph
     }
     
     internal static func barOffset(_ section: CGSize, _ widthFactor: CGFloat, _ value: Double, _ maxValue: Double) -> CGSize {
