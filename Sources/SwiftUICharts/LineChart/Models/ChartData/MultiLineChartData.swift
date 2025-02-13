@@ -79,9 +79,7 @@ public final class MultiLineChartData: CTLineChartDataProtocol, GetDataProtocol,
                         VStack {
                             if self.chartStyle.xAxisLabelPosition == .bottom {
                                 RotatedText(chartData: self, label: data.wrappedXAxisLabel, rotation: angle)
-                                Spacer()
                             } else {
-                                Spacer()
                                 RotatedText(chartData: self, label: data.wrappedXAxisLabel, rotation: angle)
                             }
                         }
@@ -101,9 +99,7 @@ public final class MultiLineChartData: CTLineChartDataProtocol, GetDataProtocol,
                             VStack {
                                 if self.chartStyle.xAxisLabelPosition == .bottom {
                                     RotatedText(chartData: self, label: labelArray[i], rotation: angle)
-                                    Spacer()
                                 } else {
-                                    Spacer()
                                     RotatedText(chartData: self, label: labelArray[i], rotation: angle)
                                 }
                             }

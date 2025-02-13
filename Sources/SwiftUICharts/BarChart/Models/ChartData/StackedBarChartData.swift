@@ -88,9 +88,7 @@ public final class StackedBarChartData: CTMultiBarChartDataProtocol, GetDataProt
                         VStack {
                             if self.chartStyle.xAxisLabelPosition == .bottom {
                                 RotatedText(chartData: self, label: dataSet.setTitle, rotation: angle)
-                                Spacer()
                             } else {
-                                Spacer()
                                 RotatedText(chartData: self, label: dataSet.setTitle, rotation: angle)
                             }
                         }
@@ -111,9 +109,7 @@ public final class StackedBarChartData: CTMultiBarChartDataProtocol, GetDataProt
                             VStack {
                                 if self.chartStyle.xAxisLabelPosition == .bottom {
                                     RotatedText(chartData: self, label: labelArray[i], rotation: angle)
-                                    Spacer()
                                 } else {
-                                    Spacer()
                                     RotatedText(chartData: self, label: labelArray[i], rotation: angle)
                                 }
                             }
