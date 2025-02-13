@@ -20,6 +20,10 @@ public struct GroupedBarDataPoint: CTMultiBarDataPoint {
     public var group: GroupingData
     public var legendTag: String = ""
     
+    //CustomCode
+    public var customFloatingInfo: [CustomFloatingView]?
+    //
+    
     /// Data model for a single data point with colour info for use with a grouped bar chart.
     /// - Parameters:
     ///   - value: Value of the data point.
@@ -30,12 +34,15 @@ public struct GroupedBarDataPoint: CTMultiBarDataPoint {
         value: Double,
         description: String? = nil,
         date: Date? = nil,
-        group: GroupingData
+        group: GroupingData,
+        customFloatingInfo: [CustomFloatingView]? = nil
+    //
     ) {
         self.value = value
         self.description = description
         self.date = date
         self.group = group
+        self.customFloatingInfo = customFloatingInfo
     }
     
     public typealias ID = UUID

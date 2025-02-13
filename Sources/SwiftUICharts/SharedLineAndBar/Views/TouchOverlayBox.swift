@@ -28,16 +28,42 @@ internal struct TouchOverlayBox<T: CTChartData>: View {
         Group {
             if chartData.chartStyle.infoBoxContentAlignment == .vertical {
                 VStack(alignment: .leading, spacing: 0) {
-                    ForEach(chartData.infoView.touchOverlayInfo, id: \.id) { point in
-                        chartData.infoDescription(info: point)
-                            .font(chartData.chartStyle.infoBoxDescriptionFont)
-                            .foregroundColor(chartData.chartStyle.infoBoxDescriptionColour)
-                        chartData.infoValueUnit(info: point)
-                            .font(chartData.chartStyle.infoBoxValueFont)
-                            .foregroundColor(chartData.chartStyle.infoBoxValueColour)
-                        chartData.infoLegend(info: point)
-                            .foregroundColor(chartData.chartStyle.infoBoxDescriptionColour)
+                    
+                    if chartData.infoView.touchOverlayCustomInfo.count > 0
+                    {
+                        ForEach(chartData.infoView.touchOverlayCustomInfo, id: \.identifier) { point in
+                            HStack
+                            {
+                                    Text("\(point.leftLabel.title)")
+                                        .frame(alignment: .leading)
+                                        .font(point.leftLabel.font)
+                                        .foregroundColor(point.leftLabel.color)
+        
+                                
+                                    Text("\(point.rightLabel.title)")
+                                        .frame(alignment: .trailing)
+                                        .font(point.rightLabel.font)
+                                        .foregroundColor(point.rightLabel.color)
+                            }
+                           
+                        }
                     }
+                    else
+                    {
+                        ForEach(chartData.infoView.touchOverlayInfo, id: \.id) { point in
+                            chartData.infoDescription(info: point)
+                                .font(chartData.chartStyle.infoBoxDescriptionFont)
+                                .foregroundColor(chartData.chartStyle.infoBoxDescriptionColour)
+                            chartData.infoValueUnit(info: point)
+                                .font(chartData.chartStyle.infoBoxValueFont)
+                                .foregroundColor(chartData.chartStyle.infoBoxValueColour)
+                            if chartData.infoView.touchOverlayInfo.count > 1
+                            {
+                                chartData.infoLegend(info: point)
+                                    .foregroundColor(chartData.chartStyle.infoBoxDescriptionColour)
+                            }
+                        }
+                    } 
                 }
             } else {
                 HStack {

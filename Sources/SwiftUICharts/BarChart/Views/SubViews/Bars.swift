@@ -40,6 +40,10 @@ internal struct ColourBar<CD: CTBarChartDataProtocol & GetDataProtocol,
         GeometryReader { geo in
             RoundedRectangleBarShape(chartData.barStyle.cornerRadius)
                 .fill(colour)
+                .if(dataPoint.value < 0, transform: { view in
+                    view
+                        .rotationEffect(.degrees(180))
+                })
                 .frame(width: BarLayout.barWidth(geo.size.width, chartData.barStyle.barWidth))
                 .frame(height: frameAnimationValue(dataPoint.value, height: geo.size.height))
                 .offset(offsetAnimationValue(dataPoint.value, size: geo.size))
@@ -66,8 +70,15 @@ internal struct ColourBar<CD: CTBarChartDataProtocol & GetDataProtocol,
     }
     
     func offsetAnimationValue(_ value: Double, size: CGSize) -> CGSize {
-        let startValue = BarLayout.barOffset(size, chartData.barStyle.barWidth, Double(value), chartData.maxValue)
-        let endValue = BarLayout.barOffset(size, chartData.barStyle.barWidth, 0, 0)
+        var startValue = BarLayout.barOffset(size, chartData.barStyle.barWidth, Double(value), chartData.maxValue)
+        var endValue = BarLayout.barOffset(size, chartData.barStyle.barWidth, 0, 0)
+        //Added the below check and changed value of to startValue, endValue for negative values in graph
+        if value < 0
+        {
+            let temp = startValue
+            startValue = endValue
+            endValue = temp
+        }
         if chartData.disableAnimation {
             return startValue
         } else {

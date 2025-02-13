@@ -69,4 +69,10 @@ public struct InfoViewData<DP: CTDataPointBaseProtocol> {
      Option to display units before or after values.
      */
     var touchUnit: TouchUnit = .none
+    
+    //CustomCode
+    /***
+        This variable is used to get values to display in floatingInfoBox
+     */
+    var touchOverlayCustomInfo: [CustomFloatingView] = []
 }

@@ -36,13 +36,13 @@ internal struct YAxisLabels<T>: ViewModifier where T: CTLineBarChartDataProtocol
                 case .leading:
                     HStack(spacing: 0) {
                         chartData.getYAxisTitle(colour: colourIndicator)
-                        chartData.getYAxisLabels().padding(.trailing, 4)
+                        chartData.getYAxisLabels(alignment: .trailing).padding(.trailing, 20)
                         content
                     }
                 case .trailing:
                     HStack(spacing: 0) {
                         content
-                        chartData.getYAxisLabels().padding(.leading, 4)
+                        chartData.getYAxisLabels(alignment: .leading).padding(.leading, 20)
                         chartData.getYAxisTitle(colour: colourIndicator)
                     }
                 }
